@@ -4,7 +4,10 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"strings"
+
 	"github.com/gorilla/websocket"
+
 	// "github.com/zalando/go-keyring"
 	"net/http"
 	"net/url"
@@ -98,10 +101,13 @@ func main() {
 		for {
 			_, message, err := wsConn.ReadMessage()
 			if err != nil {
+				fmt.Println(err)
 				panic(err)
 			}
 			fmt.Println(string(message))
-			// done <- true
+			if strings.Contains(string(message), "376") {
+				wsConn.WriteMessage(websocket.TextMessage, []byte("JOIN #"+channelName))
+			}
 		}
 	}()
 
