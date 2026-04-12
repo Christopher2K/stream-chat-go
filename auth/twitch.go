@@ -14,3 +14,7 @@ type AuthTokenResponse struct {
 	TokenType    string `json:"token_type"`
 	ExpiresIn    int    `json:"expires_in"`
 }
+
+// func refreshAuth(auth AuthTokenResponse) (AuthTokenResponse, error) {}
+
+// func RestoreAuth() (AuthTokenResponse, error) {}
